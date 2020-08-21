@@ -1,11 +1,11 @@
-class Bold {
+class Ball {
   float r;
   PVector location;
   PVector velocity;
   PVector acceleration;
   boolean isHeld;
   color c;
-  Bold(float x, float y, float r_) {
+  Ball(float x, float y, float r_) {
     location = new PVector(x, y);
     velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
@@ -31,15 +31,19 @@ class Bold {
   }
   
   void checkEdges() {
-   if(location.x-r/2<=0 || location.x+r/2>=width) {
-     velocity.x = velocity.x * -1;
+   if(location.x-r/2<0) {
+     location.x = 0+r/2;
+     velocity.x *= -1;
+   } else if(location.x+r/2>width) {
+     location.x = width-r/2;
+     velocity.x *= -1;
    }
    if(location.y+r/2>height) {
      location.y = height-r/2;
-     velocity.y = velocity.y * -1;
+     velocity.y *= -1;
    } else if(location.y-r/2<0) {
      location.y = 0+r/2;
-     velocity.y = velocity.y * -1;
+     velocity.y *= -1;
    }
   }
 }
