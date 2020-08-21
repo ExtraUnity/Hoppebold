@@ -9,7 +9,7 @@ class Bold {
   }
   
   void update() {
-   location.add(velocity); 
+   
   }
   void render() {
    fill(0);
