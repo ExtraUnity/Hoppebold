@@ -9,8 +9,9 @@ class Bold {
   }
   
   void update() {
-   location.add(velocity); 
+
   }
+  
   void render() {
    fill(0);
    circle(location.x, location.y, r);
