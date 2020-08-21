@@ -4,12 +4,14 @@ class Bold {
   PVector velocity;
   PVector acceleration;
   boolean isHeld;
+  color c;
   Bold(float x, float y, float r_) {
     location = new PVector(x, y);
     velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
     r = r_;
     isHeld = false;
+    c = color(255);
   }
 
   void update() {
@@ -21,7 +23,7 @@ class Bold {
   }
   
   void render() {
-    fill(0);
+    fill(c);
     circle(location.x, location.y, r);
   }
   void addForce(PVector force) {
@@ -29,11 +31,14 @@ class Bold {
   }
   
   void checkEdges() {
-   if(location.x-r<=0 || location.x+r>=width) {
+   if(location.x-r/2<=0 || location.x+r/2>=width) {
      velocity.x = velocity.x * -1;
    }
-   if(location.y-r<0 || location.y+r>height) {
-     location.y = height-r;
+   if(location.y+r/2>height) {
+     location.y = height-r/2;
+     velocity.y = velocity.y * -1;
+   } else if(location.y-r/2<0) {
+     location.y = 0+r/2;
      velocity.y = velocity.y * -1;
    }
   }
