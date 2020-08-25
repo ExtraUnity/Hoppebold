@@ -6,7 +6,7 @@ void setup() {
   size(500, 500);
   ball = new Ball[2];
   for (int i = 0; i<ball.length; i++) {
-    ball[i] = new Ball(random(50, width-50), random(50, height-50), 25);
+    ball[i] = new Ball(random(50, width-50), random(50, height-50), 40);
   }
 }
 
@@ -18,9 +18,17 @@ void draw() {
     ball[i].addForce(wind);
     ball[i].update();
     ball[i].checkEdges();
+    for(int j = 0; j<ball.length; j++) {
+      if(i!=j) {
+      if(ball[i].checkCollide(ball[j])) {
+        ball[i].collide(ball[j]);
+      }
+      }
+    }
   }
   fill(255);
   text("Press 1 for red ball, 2 for green ball & 0 for white ball", 120, 40);
+  text("Click a ball to move it", 120,20);
 }
 
 void mousePressed() {
