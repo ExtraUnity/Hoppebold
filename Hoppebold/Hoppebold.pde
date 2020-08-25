@@ -1,6 +1,7 @@
 Ball[] ball;
 PVector gravity = new PVector(0, 1);
 PVector wind = new PVector(0.01, 0);
+boolean ballHeld = false;
 void setup() {
   size(500, 500);
   ball = new Ball[2];
@@ -22,17 +23,16 @@ void draw() {
   text("Press 1 for red ball, 2 for green ball & 0 for white ball", 120, 40);
 }
 
-void mouseDragged() {
-
+void mousePressed() {
   for (int i = 0; i<ball.length; i++) {
-    if (!ball[i].isHeld) {
-      if (mouseX<ball[i].location.x+ball[i].r && mouseX>ball[i].location.x-ball[i].r && mouseY<ball[i].location.y+ball[i].r && mouseY>ball[i].location.y-ball[i].r) {
-        ball[i].isHeld = true;
-        ball[i].velocity.mult(0);
-        ball[i].location.x = mouseX;
-        ball[i].location.y = mouseY;
-      }
-    } else {
+    if (mouseX<ball[i].location.x+ball[i].r && mouseX>ball[i].location.x-ball[i].r && mouseY<ball[i].location.y+ball[i].r && mouseY>ball[i].location.y-ball[i].r) {
+      ball[i].isHeld = true;
+    }
+  }
+}
+void mouseDragged() {
+  for (int i = 0; i<ball.length; i++) {
+    if (ball[i].isHeld) {
       ball[i].velocity.mult(0);
       ball[i].location.x = mouseX;
       ball[i].location.y = mouseY;
@@ -44,6 +44,7 @@ void mouseReleased() {
   for (int i = 0; i<ball.length; i++) {
     ball[i].isHeld = false;
   }
+  ballHeld = false;
 }
 
 void newBackground() {
